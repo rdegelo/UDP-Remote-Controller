@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         final Settings settings = new Settings();
         settings.Load(this);
 
-        SequenceAdapter adapter = new SequenceAdapter(this, settings.getSequencies());
+        SequenceAdapter adapter = new SequenceAdapter(this, settings.getSequencies(), R.layout.row_sequence);
 
         list_view.setAdapter(adapter);
 

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.technocreatives.rdegelo.creativeremotecontroller">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,8 +20,8 @@
         </activity>
         <activity
             android:name=".ManageActivity"
-            android:label="@string/label_manage">
-        </activity>
+            android:label="@string/label_manage"></activity>
+        <activity android:name=".EditSequenceActivity"></activity>
     </application>
 
 </manifest>

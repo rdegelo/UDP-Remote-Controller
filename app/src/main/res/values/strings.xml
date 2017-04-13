@@ -6,4 +6,5 @@
     <string name="manage_ip">IP</string>
     <string name="manage_port">Port</string>
     <string name="row_sequence_execute">Execute</string>
+    <string name="command_add">Add Command</string>
 </resources>

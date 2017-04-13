@@ -32,31 +32,35 @@ public class Settings {
         setIp(prefs.getString(PREFS_IP_NAME, ""));
         setPort(prefs.getInt(PREFS_PORT_NAME, 2593));
 
-        Type listType = new TypeToken<ArrayList<Sequence>>() {
-        }.getType();
-        //setSequencies((List<Sequence>)new Gson().fromJson(prefs.getString(PREFS_SEQUENCIES_NAME, null), listType));
+        String existingSequencies = prefs.getString(PREFS_SEQUENCIES_NAME, null);
+        List<Sequence> sequencies = null;
 
-        List<Command> commands = new ArrayList<>();
-        commands.add(new Command("start video1", 0));
-        commands.add(new Command("stop video1", 500));
-        commands.add(new Command("start video2", 0));
-        commands.add(new Command("start fade", 1200));
-        commands.add(new Command("stop fade", 200));
-        commands.add(new Command("stop video2", 0));
+        if(existingSequencies == null) {
+            List<Command> commands = new ArrayList<>();
+            commands.add(new Command("start video1", 0));
+            commands.add(new Command("stop video1", 500));
+            commands.add(new Command("start video2", 0));
+            commands.add(new Command("start fade", 1200));
+            commands.add(new Command("stop fade", 200));
+            commands.add(new Command("stop video2", 0));
 
-        Sequence s1 = new Sequence("Sequence 1");
-        s1.setCommands(commands);
+            Sequence s1 = new Sequence("Sequence 1");
+            s1.setCommands(commands);
 
-        Sequence s2 = new Sequence("Sequence 2");
-        s2.setCommands(commands);
+            Sequence s2 = new Sequence("Sequence 2");
+            s2.setCommands(commands);
 
-        Sequence s3 = new Sequence("Sequence 3");
-        s3.setCommands(commands);
+            Sequence s3 = new Sequence("Sequence 3");
+            s3.setCommands(commands);
 
-        List<Sequence> sequencies = new ArrayList<Sequence>();
-        sequencies.add(s1);
-        sequencies.add(s2);
-        sequencies.add(s3);
+            sequencies = new ArrayList<Sequence>();
+            sequencies.add(s1);
+            sequencies.add(s2);
+            sequencies.add(s3);
+        } else {
+            Type listType = new TypeToken<ArrayList<Sequence>>() {}.getType();
+            sequencies = (List<Sequence>)new Gson().fromJson(prefs.getString(PREFS_SEQUENCIES_NAME, null), listType);
+        }
 
         setSequencies(sequencies);
     }

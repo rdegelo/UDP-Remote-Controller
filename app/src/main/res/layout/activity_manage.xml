@@ -68,5 +68,19 @@
                 android:layout_toRightOf="@+id/manage_label_port"
                 android:layout_toEndOf="@+id/manage_label_port"/>
         </RelativeLayout>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sequencies" />
+
+        <ListView
+            android:id="@+id/manage_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

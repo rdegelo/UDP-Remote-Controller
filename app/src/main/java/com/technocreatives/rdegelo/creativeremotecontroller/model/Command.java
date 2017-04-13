@@ -9,7 +9,7 @@ public class Command {
     private int delayBefore;
 
     public Command() {
-
+        setDelayBefore(0);
     }
 
     public Command(String text, int delayBefore) {

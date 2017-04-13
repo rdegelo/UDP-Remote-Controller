@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.technocreatives.rdegelo.creativeremotecontroller.R;
@@ -21,11 +22,13 @@ public class SequenceAdapter extends ArrayAdapter<Sequence> {
     private final Context context;
     private final List<Sequence> values;
     private OnSequenceExecutedListener listener;
+    private int resource_id;
 
-    public SequenceAdapter(Context context, List<Sequence> values) {
+    public SequenceAdapter(Context context, List<Sequence> values, int resource_id) {
         super(context, -1, values);
         this.context = context;
         this.values = values;
+        this.resource_id = resource_id;
     }
 
     public void setOnSequenceExecutedListener(OnSequenceExecutedListener listener) {
@@ -35,10 +38,10 @@ public class SequenceAdapter extends ArrayAdapter<Sequence> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.row_sequence, parent, false);
+        View rowView = inflater.inflate(resource_id, parent, false);
 
         TextView textView = (TextView)rowView.findViewById(R.id.row_sequence_title);
-        Button button = (Button)rowView.findViewById(R.id.row_sequence_execute);
+        ImageButton button = (ImageButton)rowView.findViewById(R.id.row_sequence_button);
 
         textView.setText(values.get(position).getTitle());
         button.setOnClickListener(new View.OnClickListener() {

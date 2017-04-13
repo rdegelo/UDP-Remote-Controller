@@ -5,16 +5,25 @@
     android:layout_marginRight="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <TextView
+    <EditText
+        android:inputType="number"
         android:layout_centerVertical="true"
-        android:id="@+id/row_sequence_title"
+        android:id="@+id/row_command_delay"
+        android:layout_alignParentLeft="true"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/row_command_button"
+        android:layout_toRightOf="@+id/row_command_delay"
+        android:id="@+id/row_command_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <ImageButton
-        android:id="@+id/row_sequence_button"
+        android:id="@+id/row_command_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@android:drawable/ic_media_play" />
+        android:src="@android:drawable/ic_delete" />
 </RelativeLayout>
