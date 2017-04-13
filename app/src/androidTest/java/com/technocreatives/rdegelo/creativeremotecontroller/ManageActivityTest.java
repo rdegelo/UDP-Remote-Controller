@@ -65,8 +65,12 @@ public class ManageActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.manage_ip_edit)).perform(ViewActions.clearText());
         Espresso.onView(ViewMatchers.withId(R.id.manage_ip_edit)).perform(ViewActions.typeText("1.1.1.1"));
 
+        Thread.sleep(500);
+
         Espresso.onView(ViewMatchers.withId(R.id.manage_port_edit)).perform(ViewActions.clearText());
         Espresso.onView(ViewMatchers.withId(R.id.manage_port_edit)).perform(ViewActions.typeText("1020"));
+
+        Thread.sleep(500);
 
         Espresso.onView(ViewMatchers.withId(R.id.manage_enable_broadcast)).perform(ViewActions.click());
 
