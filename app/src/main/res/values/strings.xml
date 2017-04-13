@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Creative Remote Controller</string>
+    <string name="label_manage">CRC - Manage</string>
+    <string name="menu_manage">Manage</string>
+    <string name="manage_enable_broadcast">Enable Broadcast</string>
+    <string name="manage_ip">IP</string>
+    <string name="manage_port">Port</string>
+    <string name="row_sequence_execute">Execute</string>
+</resources>
