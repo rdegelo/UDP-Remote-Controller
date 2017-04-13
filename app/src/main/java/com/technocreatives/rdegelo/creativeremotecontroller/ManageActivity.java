@@ -22,6 +22,7 @@ import com.technocreatives.rdegelo.creativeremotecontroller.model.Settings;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ManageActivity extends AppCompatActivity {
@@ -56,11 +57,9 @@ public class ManageActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    ip_layout.setVisibility(View.INVISIBLE);
-                    port_layout.setVisibility(View.INVISIBLE);
+                    ip_layout.setVisibility(View.GONE);
                 } else {
                     ip_layout.setVisibility(View.VISIBLE);
-                    port_layout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -91,8 +90,8 @@ public class ManageActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(resultCode == Activity.RESULT_OK){
-            Type listType = new TypeToken<ArrayList<Command>>() {}.getType();
-            List<Command> commands = (List<Command>)new Gson().fromJson(data.getStringExtra("commands"), listType);
+            Type listType = new TypeToken<LinkedList<Command>>() {}.getType();
+            LinkedList<Command> commands = (LinkedList<Command>)new Gson().fromJson(data.getStringExtra("commands"), listType);
 
             sequencies.get(requestCode).setCommands(commands);
         }
@@ -114,6 +113,7 @@ public class ManageActivity extends AppCompatActivity {
             public void sequenceExecuted(Sequence s) {
                 Intent i = new Intent(ManageActivity.this, EditSequenceActivity.class);
                 i.putExtra("commands", new Gson().toJson(s.getCommands()));
+                i.putExtra("title", s.getTitle());
                 startActivityForResult(i, settings.getSequencies().indexOf(s));
             }
         });

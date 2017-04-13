@@ -18,12 +18,13 @@ import com.technocreatives.rdegelo.creativeremotecontroller.model.Sequence;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class EditSequenceActivity extends AppCompatActivity {
     private ListView list_view;
     private Button add_button;
-    private List<Command> commands;
+    private LinkedList<Command> commands;
 
     private CommandAdapter adapter;
 
@@ -38,8 +39,10 @@ public class EditSequenceActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        Type listType = new TypeToken<ArrayList<Command>>() {}.getType();
-        commands = (List<Command>)new Gson().fromJson(getIntent().getStringExtra("commands"), listType);
+        Type listType = new TypeToken<LinkedList<Command>>() {}.getType();
+        commands = new Gson().fromJson(getIntent().getStringExtra("commands"), listType);
+
+        setTitle(getIntent().getStringExtra("title"));
 
         list_view = (ListView)findViewById(R.id.command_list_view);
         add_button = (Button)findViewById(R.id.command_add);

@@ -17,6 +17,32 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@android:drawable/ic_input_add"
             android:gravity="left|center_vertical" />
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="@string/comand_delay_after"
+                android:ellipsize="none"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="@string/command_command_text"
+                android:layout_centerVertical="true"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="       "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <ListView
             android:id="@+id/command_list_view"
             android:layout_width="match_parent"

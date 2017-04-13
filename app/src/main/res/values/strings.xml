@@ -7,4 +7,6 @@
     <string name="manage_port">Port</string>
     <string name="row_sequence_execute">Execute</string>
     <string name="command_add">Add Command</string>
+    <string name="comand_delay_after">Delay After</string>
+    <string name="command_command_text">Command Text</string>
 </resources>

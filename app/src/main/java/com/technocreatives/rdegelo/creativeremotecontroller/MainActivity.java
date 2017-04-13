@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 text_log.setText(text_log.getText() + "\n" + msg.getData().getString("text"));
             else if(currentProgressDialog != null) {
                 currentProgressDialog.dismiss();
+                currentProgressDialog = null;
             }
 
             final int scrollAmount = text_log.getLayout().getLineTop(text_log.getLineCount()) - text_log.getHeight();
@@ -64,15 +65,17 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnSequenceExecutedListener(new SequenceAdapter.OnSequenceExecutedListener() {
             @Override
             public void sequenceExecuted(Sequence s) {
-                text_log.setText("");
+                if(currentProgressDialog == null) {
+                    text_log.setText("");
 
-                currentProgressDialog = new ProgressDialog(MainActivity.this);
-                currentProgressDialog.setMessage("Executing...");
-                currentProgressDialog.setCancelable(false);
-                currentProgressDialog.show();
+                    currentProgressDialog = new ProgressDialog(MainActivity.this);
+                    currentProgressDialog.setMessage("Executing...");
+                    currentProgressDialog.setCancelable(false);
+                    currentProgressDialog.show();
 
-                currentExecutor = new SequenceExecutor(settings, s, handler);
-                currentExecutor.startExecutionAsync();
+                    currentExecutor = new SequenceExecutor(settings, s, handler);
+                    currentExecutor.startExecutionAsync();
+                }
             }
         });
 

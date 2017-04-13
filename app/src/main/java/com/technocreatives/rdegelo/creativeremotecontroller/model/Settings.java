@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class Settings {
         List<Sequence> sequencies = null;
 
         if(existingSequencies == null) {
-            List<Command> commands = new ArrayList<>();
+            LinkedList<Command> commands = new LinkedList<>();
             commands.add(new Command("start video1", 0));
             commands.add(new Command("stop video1", 500));
             commands.add(new Command("start video2", 0));

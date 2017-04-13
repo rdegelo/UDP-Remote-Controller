@@ -13,6 +13,9 @@ import com.technocreatives.rdegelo.creativeremotecontroller.model.Settings;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 
 /**
  * Created by rdegelo on 13/04/2017.
@@ -56,13 +59,40 @@ public class SequenceExecutor {
                     postMessage("Sending: " + c.getText());
 
                     byte[] msg = (c.getText() + "\n").getBytes();
-                    InetAddress address = InetAddress.getByName(settings.getIp());
-                    dp = new DatagramPacket(msg, msg.length, address, settings.getPort());
-
-                    if(settings.isUse_broadcast())
+                    if(settings.isUse_broadcast()) {
                         ds.setBroadcast(true);
 
-                    ds.send(dp);
+                        //Try default broadcast ip
+                        try {
+                            dp = new DatagramPacket(msg, msg.length, InetAddress.getByName("255.255.255.255"), settings.getPort());
+                            ds.send(dp);
+                        } catch (Exception e) {
+                        }
+
+                        //Try all interfaces
+                        Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+                        while (interfaces.hasMoreElements()) {
+                            NetworkInterface networkInterface = interfaces.nextElement();
+
+                            for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
+                                InetAddress broadcast = interfaceAddress.getBroadcast();
+                                if (broadcast == null) {
+                                    continue;
+                                }
+
+                                try {
+                                    DatagramPacket sendPacket = new DatagramPacket(msg, msg.length, broadcast, settings.getPort());
+                                    ds.send(sendPacket);
+                                } catch (Exception e) {
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        InetAddress address = InetAddress.getByName(settings.getIp());
+                        dp = new DatagramPacket(msg, msg.length, address, settings.getPort());
+                        ds.send(dp);
+                    }
                 }
             }
             catch (Exception e)

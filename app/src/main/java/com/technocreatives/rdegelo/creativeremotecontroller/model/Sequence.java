@@ -1,6 +1,7 @@
 package com.technocreatives.rdegelo.creativeremotecontroller.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -8,14 +9,14 @@ import java.util.List;
  */
 
 public class Sequence {
-    private List<Command> commands;
+    private LinkedList<Command> commands;
     private String title;
 
-    public List<Command> getCommands() {
+    public LinkedList<Command> getCommands() {
         return commands;
     }
 
-    public void setCommands(List<Command> cmd) {
+    public void setCommands(LinkedList<Command> cmd) {
         commands = cmd;
     }
 
@@ -29,6 +30,6 @@ public class Sequence {
 
     public Sequence(String title) {
         setTitle(title);
-        setCommands(new ArrayList<Command>());
+        setCommands(new LinkedList<Command>());
     }
 }

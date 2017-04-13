@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.technocreatives.rdegelo.creativeremotecontroller.R;
 import com.technocreatives.rdegelo.creativeremotecontroller.model.Command;
@@ -17,6 +18,7 @@ import com.technocreatives.rdegelo.creativeremotecontroller.model.Sequence;
 
 import org.w3c.dom.Text;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -25,10 +27,10 @@ import java.util.List;
 
 public class CommandAdapter extends ArrayAdapter<Command> {
     private final Context context;
-    private final List<Command> values;
+    private final LinkedList<Command> values;
     private OnCommandRemovedListener listener;
 
-    public CommandAdapter(Context context, List<Command> values) {
+    public CommandAdapter(Context context, LinkedList<Command> values) {
         super(context, -1, values);
         this.context = context;
         this.values = values;
@@ -105,18 +107,35 @@ public class CommandAdapter extends ArrayAdapter<Command> {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if(s.length() > 0)
-                cmd.setDelayBefore(Integer.parseInt(s.toString()));
-            else
-                cmd.setDelayBefore(0);
+            try {
+                if(s.length() > 0)
+                    cmd.setDelayBefore(Integer.parseInt(s.toString()));
+                else
+                    cmd.setDelayBefore(0);
+            } catch (NumberFormatException ex) {
+                Toast.makeText(context, "Delay value is invalid", Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(s.length() > 0)
-                cmd.setDelayBefore(Integer.parseInt(s.toString()));
-            else
-                cmd.setDelayBefore(0);
+            try {
+                if (s.length() > 0)
+                    cmd.setDelayBefore(Integer.parseInt(s.toString()));
+                else
+                    cmd.setDelayBefore(0);
+            } catch (NumberFormatException ex) {
+                Toast.makeText(context, "Delay value is invalid", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private static class ViewHolder {
+        EditText editText;
+        EditText editDelay;
+        ImageButton button;
+
+        SyncTextWatcher textWatcher;
+        SyncDelayWatcher delayWatcher;
     }
 }
